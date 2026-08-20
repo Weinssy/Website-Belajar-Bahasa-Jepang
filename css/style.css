@@ -1,0 +1,10 @@
+html { scroll-behavior: smooth; }
+body { background: #f5f7f8; color: #20242a; }
+.wash { background: radial-gradient(circle at 86% 20%, rgba(255,183,197,.52), transparent 28%), linear-gradient(135deg, #fff 0%, #fff8f9 56%, #f5f7f8 100%); }
+.grid-paper { background-image: linear-gradient(rgba(188,0,45,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(188,0,45,.06) 1px, transparent 1px); background-size: 28px 28px; }
+.kana-card, .feature-card { transition: transform .2s ease, box-shadow .2s ease; }
+.kana-card:hover, .feature-card:hover { transform: translateY(-4px); box-shadow: 0 16px 30px rgba(32,36,42,.1); }
+.option:has(input:checked) { border-color: #BC002D; background: #fff1f3; }
+.option input { accent-color: #BC002D; }
+ruby rt { transition: opacity .15s ease; }
+.furigana-off rt { opacity: 0; }
