@@ -47,7 +47,7 @@
     menus.innerHTML = types.map(typeName => {
       const typeItems = items.map((item, index) => ({ item, index })).filter(({ item }) => item[2] === typeName && (mode === 'single' ? [...item[0]].length === 1 : [...item[0]].length > 1));
       if (!typeItems.length) return `<section class="rounded-2xl border border-dashed border-slate-200 p-5"><h3 class="font-display text-xl">${typeName}</h3><p class="mt-2 text-sm text-slate-500">Belum ada kosakata ${typeName.toLowerCase()} yang tersedia.</p></section>`;
-      return `<fieldset class="rounded-2xl border border-slate-200 p-5"><legend class="px-2 font-display text-xl">${typeName}</legend><div class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">${typeItems.map(({ item, index }) => choiceMarkup(index, `${item[0]} <span class="text-slate-500">${item[1]}</span>`, 'character', true)).join('')}</div></fieldset>`;
+      return `<fieldset class="rounded-2xl border border-slate-200 p-5" data-type="${typeName}"><legend class="px-2 font-display text-xl">${typeName}</legend><label class="option mt-3 inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-bold transition hover:border-crimson"><input type="checkbox" data-group="type" data-type="${typeName}" checked><span>Pilih semua ${typeName}</span></label><div class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">${typeItems.map(({ item, index }) => choiceMarkup(index, `${item[0]} <span class="text-slate-500">${item[1]}</span>`, 'character', true)).join('')}</div></fieldset>`;
     }).join('');
     updateSelection();
   }
@@ -57,7 +57,16 @@
     startButton.disabled = selectedItems.length === 0;
     selectionHint.textContent = selectedItems.length ? `${selectedItems.length} pilihan dipilih.` : 'Pilih setidaknya satu pilihan.';
   }
-  menus.addEventListener('change', updateSelection);
+  menus.addEventListener('change', event => {
+    const typeToggle = event.target.closest('input[data-group="type"]');
+    if (typeToggle) menus.querySelectorAll(`fieldset[data-type="${typeToggle.dataset.type}"] input[data-group="character"]`).forEach(input => { input.checked = typeToggle.checked; });
+    if (event.target.matches('input[data-group="character"]')) {
+      const fieldset = event.target.closest('fieldset[data-type]');
+      const characters = [...fieldset.querySelectorAll('input[data-group="character"]')];
+      fieldset.querySelector('input[data-group="type"]').checked = characters.every(input => input.checked);
+    }
+    updateSelection();
+  });
   modeInputs.forEach(input => input.addEventListener('change', renderMenus));
 
   function showNext() { current = selectedItems[Math.floor(Math.random() * selectedItems.length)]; character.textContent = current[0]; type.textContent = current[2]; input.value = ''; input.focus(); answered = false; next.classList.add('hidden'); feedback.textContent = 'Ketik romaji'; feedback.className = 'text-sakura'; game.classList.remove('ring-4','ring-green-400','ring-red-400'); remaining.textContent = Math.max(0, 10 - round); }
