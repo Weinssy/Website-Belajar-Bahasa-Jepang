@@ -1,5 +1,25 @@
 (() => {
-  const items = [['あ','a','Hiragana'],['き','ki','Hiragana'],['し','shi','Hiragana'],['ア','a','Katakana'],['コ','ko','Katakana'],['山','yama','Kanji'],['川','kawa','Kanji'],['学生','gakusei','Kanji']];
+  const kana = [
+    ['あいうえお', ['a', 'i', 'u', 'e', 'o']], ['かきくけこ', ['ka', 'ki', 'ku', 'ke', 'ko']], ['さしすせそ', ['sa', 'shi', 'su', 'se', 'so']],
+    ['たちつてと', ['ta', 'chi', 'tsu', 'te', 'to']], ['なにぬねの', ['na', 'ni', 'nu', 'ne', 'no']], ['はひふへほ', ['ha', 'hi', 'fu', 'he', 'ho']],
+    ['まみむめも', ['ma', 'mi', 'mu', 'me', 'mo']], ['やゆよ', ['ya', 'yu', 'yo']], ['らりるれろ', ['ra', 'ri', 'ru', 're', 'ro']],
+    ['わをん', ['wa', 'wo', 'n']], ['がぎぐげご', ['ga', 'gi', 'gu', 'ge', 'go']], ['ざじずぜぞ', ['za', 'ji', 'zu', 'ze', 'zo']],
+    ['だぢづでど', ['da', 'ji', 'zu', 'de', 'do']], ['ばびぶべぼ', ['ba', 'bi', 'bu', 'be', 'bo']], ['ぱぴぷぺぽ', ['pa', 'pi', 'pu', 'pe', 'po']]
+  ];
+  const hiragana = kana.flatMap(([characters, readings]) => [...characters].map((character, index) => [character, readings[index], 'Hiragana']));
+  const katakana = hiragana.map(([character, reading]) => [String.fromCodePoint(character.codePointAt(0) + 0x60), reading, 'Katakana']);
+  const kanji = [
+    ['日', 'hi'], ['月', 'tsuki'], ['火', 'hi'], ['水', 'mizu'], ['木', 'ki'], ['金', 'kane'], ['土', 'tsuchi'],
+    ['山', 'yama'], ['川', 'kawa'], ['田', 'ta'], ['天', 'ten'], ['気', 'ki'], ['雨', 'ame'], ['空', 'sora'],
+    ['人', 'hito'], ['子', 'ko'], ['女', 'onna'], ['男', 'otoko'], ['父', 'chichi'], ['母', 'haha'], ['友', 'tomo'],
+    ['先', 'saki'], ['生', 'sei'], ['学', 'gaku'], ['校', 'kou'], ['本', 'hon'], ['名', 'namae'], ['年', 'toshi'],
+    ['上', 'ue'], ['下', 'shita'], ['中', 'naka'], ['大', 'oo'], ['小', 'chiisai'], ['長', 'nagai'], ['高', 'takai'],
+    ['新', 'atarashii'], ['古', 'furui'], ['白', 'shiro'], ['赤', 'aka'], ['青', 'ao'], ['食', 'taberu'], ['飲', 'nomu'],
+    ['見', 'miru'], ['聞', 'kiku'], ['話', 'hanasu'], ['読', 'yomu'], ['書', 'kaku'], ['行', 'iku'], ['来', 'kuru'], ['電', 'den'],
+    ['車', 'kuruma'], ['駅', 'eki'], ['道', 'michi'], ['何', 'nani'], ['毎', 'mai'], ['円', 'en'], ['午', 'go'], ['前', 'mae'], ['後', 'ato'],
+    ['学生', 'gakusei'], ['先生', 'sensei'], ['学校', 'gakkou'], ['日本', 'nihon']
+  ].map(([character, reading]) => [character, reading, 'Kanji']);
+  const items = [...hiragana, ...katakana, ...kanji];
   const character = document.querySelector('#letterCharacter');
   if (!character) return;
   const type = document.querySelector('#letterType'); const input = document.querySelector('#letterInput'); const form = document.querySelector('#letterForm'); const next = document.querySelector('#letterNext'); const feedback = document.querySelector('#letterFeedback'); const scoreText = document.querySelector('#letterScore'); const remaining = document.querySelector('#letterRemaining'); const game = document.querySelector('#letterGame');
