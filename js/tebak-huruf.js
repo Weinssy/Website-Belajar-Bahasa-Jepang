@@ -8,6 +8,14 @@
   ];
   const hiragana = kana.flatMap(([characters, readings]) => [...characters].map((character, index) => [character, readings[index], 'Hiragana']));
   const katakana = hiragana.map(([character, reading]) => [String.fromCodePoint(character.codePointAt(0) + 0x60), reading, 'Katakana']);
+  const hiraganaWords = [
+    ['こんにちは', 'konnichiwa'], ['ありがとう', 'arigatou'], ['せんせい', 'sensei'], ['がっこう', 'gakkou'],
+    ['きょうしつ', 'kyoushitsu'], ['ともだち', 'tomodachi'], ['べんきょう', 'benkyou'], ['たべもの', 'tabemono']
+  ].map(([word, reading]) => [word, reading, 'Hiragana']);
+  const katakanaWords = [
+    ['テスト', 'tesuto'], ['クラス', 'kurasu'], ['ノート', 'nooto'], ['ペン', 'pen'],
+    ['デスク', 'desuku'], ['センセイ', 'sensei'], ['コンピューター', 'konpyuutaa'], ['スポーツ', 'supootsu']
+  ].map(([word, reading]) => [word, reading, 'Katakana']);
   const kanji = [
     ['日', 'hi'], ['月', 'tsuki'], ['火', 'hi'], ['水', 'mizu'], ['木', 'ki'], ['金', 'kane'], ['土', 'tsuchi'],
     ['山', 'yama'], ['川', 'kawa'], ['田', 'ta'], ['天', 'ten'], ['気', 'ki'], ['雨', 'ame'], ['空', 'sora'],
@@ -19,7 +27,7 @@
     ['車', 'kuruma'], ['駅', 'eki'], ['道', 'michi'], ['何', 'nani'], ['毎', 'mai'], ['円', 'en'], ['午', 'go'], ['前', 'mae'], ['後', 'ato'],
     ['学生', 'gakusei'], ['先生', 'sensei'], ['学校', 'gakkou'], ['日本', 'nihon']
   ].map(([character, reading]) => [character, reading, 'Kanji']);
-  const items = [...hiragana, ...katakana, ...kanji];
+  const items = [...hiragana, ...hiraganaWords, ...katakana, ...katakanaWords, ...kanji];
   const types = ['Hiragana', 'Katakana', 'Kanji'];
   const character = document.querySelector('#letterCharacter');
   if (!character) return;

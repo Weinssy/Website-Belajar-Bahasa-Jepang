@@ -1,5 +1,19 @@
 html { scroll-behavior: smooth; }
 body { background: #f5f7f8; color: #20242a; }
+.dark-mode { color-scheme: dark; }
+.dark-mode body { background: #15181c; color: #edf1f3; }
+.dark-mode .bg-white { background-color: #20252b !important; }
+.dark-mode .bg-mist, .dark-mode .bg-slate-100 { background-color: #2a3037 !important; }
+.dark-mode .text-ink { color: #edf1f3 !important; }
+.dark-mode .text-slate-500, .dark-mode .text-slate-600 { color: #aeb8c2 !important; }
+.dark-mode .border-slate-200, .dark-mode .border-slate-300 { border-color: #3c4650 !important; }
+.dark-mode .bg-white\/90 { background-color: rgba(32,37,43,.92) !important; }
+.dark-mode .wash { background: radial-gradient(circle at 86% 20%, rgba(188,0,45,.28), transparent 28%), linear-gradient(135deg, #20252b 0%, #241d21 56%, #15181c 100%); }
+.dark-mode .grid-paper { background-image: linear-gradient(rgba(255,183,197,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,183,197,.08) 1px, transparent 1px); }
+.dark-mode .option:has(input:checked) { background: #42242b; }
+.dark-mode input, .dark-mode input::placeholder { color: #edf1f3; }
+.dark-mode input::placeholder { color: #8f9aa5; }
+.dark-mode .hover\:border-crimson:hover { border-color: #ff718c !important; }
 .wash { background: radial-gradient(circle at 86% 20%, rgba(255,183,197,.52), transparent 28%), linear-gradient(135deg, #fff 0%, #fff8f9 56%, #f5f7f8 100%); }
 .grid-paper { background-image: linear-gradient(rgba(188,0,45,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(188,0,45,.06) 1px, transparent 1px); background-size: 28px 28px; }
 .kana-card, .feature-card { transition: transform .2s ease, box-shadow .2s ease; }
